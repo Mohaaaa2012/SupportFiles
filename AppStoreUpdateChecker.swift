@@ -35,3 +35,29 @@ struct AppStoreUpdateChecker {
         task.resume()
     }
 }
+
+
+
+
+
+// MARK: - AppStoreResponse
+struct AppStoreResponse: Codable {
+    let resultCount: Int?
+    let results: [AppStoreResult]?
+}
+
+// MARK: - Result
+struct AppStoreResult: Codable {
+    let releaseNotes, version: String?
+}
+
+enum CodingKeys: String, CodingKey {
+    case releaseNotes
+    case version
+}
+
+extension Bundle {
+    var releaseVersionNumber:String? {
+        infoDictionary?["CFBundleShortVersionString"] as? String
+    }
+}
